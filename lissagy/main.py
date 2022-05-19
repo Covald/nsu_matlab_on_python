@@ -21,14 +21,15 @@ def y_gen(t):
     return a2 * np.sin(w2 * t + fi2)
 
 
-npoints = 300
-x = deque([0], maxlen=npoints)
-y = deque([0], maxlen=npoints)
+npoints = 3000
+x = deque([x_gen(0)], maxlen=npoints)
+y = deque([y_gen(0)], maxlen=npoints)
 
 fig = plt.figure()
 ax = plt.axes(xlim=(-2, 2), ylim=(-1, 1))
 line, = ax.plot([], [], lw=2)
 ax.grid(True)
+
 
 def init():
     line.set_data([x_gen(0)], [y_gen(0)])
@@ -52,5 +53,5 @@ def data_gen():
         t += 0.01
 
 
-ani = animation.FuncAnimation(fig, update, data_gen, init_func=init, interval=0.01)
+ani = animation.FuncAnimation(fig, update, data_gen, init_func=init, interval=0.001)
 plt.show()
